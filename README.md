@@ -1,6 +1,5 @@
 # crud-teste-colorado
 
-📝 Descrição
 Este projeto é uma aplicação web desenvolvida com ASP.NET Core que oferece funcionalidades de CRUD (Criar, Ler, Atualizar e Deletar) para gerenciamento de clientes. Ele combina uma interface MVC tradicional para interação do usuário e uma API RESTful para operações programáticas. O Entity Framework Core é utilizado como ORM (Object-Relational Mapping) com o banco de dados SQLite, permitindo uma abordagem Code-First para o gerenciamento do esquema do banco de dados.
 
 🚀 Funcionalidades
