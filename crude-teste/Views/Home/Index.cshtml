@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Sistema de Gerenciamento de Clientes</h1>
+    <p>Este sistema permite o gerenciamento completo de clientes e seus telefones.</p>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">ABRIR GESTÃO DE CLIENTE</h5>
+                    <a asp-controller="Clientes" asp-action="Index" class="btn btn-primary">ABRIR GESTÃO DE CLIENTE</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">API RESTful</h5>
+                    <a href="/swagger" class="btn btn-primary">Acessar Swagger</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

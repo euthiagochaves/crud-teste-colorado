@@ -1,0 +1,120 @@
+﻿@model crude_teste.Models.Cliente
+
+@{
+    ViewData["Title"] = "Detalhes do Cliente";
+}
+
+<div class="container">
+    <h2>Detalhes do Cliente</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <h4>Dados Principais</h4>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <p><strong>Tipo de Pessoa:</strong> @(Model.TipoPessoa == "F" ? "Física" : "Jurídica")</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <p><strong>Documento:</strong> @Model.Documento</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <p><strong>Razão Social:</strong> @Model.RazaoSocial</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <p><strong>Nome Fantasia:</strong> @Model.NomeFantasia</p>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12 mb-3">
+                    <h4>Endereço</h4>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <p><strong>Endereço:</strong> @Model.Endereco</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <p><strong>Complemento:</strong> @(string.IsNullOrEmpty(Model.Complemento) ? "-" : Model.Complemento)</p>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <p><strong>Bairro:</strong> @Model.Bairro</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <p><strong>Cidade:</strong> @Model.Cidade</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <p><strong>UF:</strong> @Model.UF</p>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <p><strong>CEP:</strong> @Model.CEP</p>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12 mb-3">
+                    <h4>Telefones</h4>
+                </div>
+
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Número</th>
+                                <th>Operadora</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Telefones != null && Model.Telefones.Any())
+                            {
+                                foreach (var telefone in Model.Telefones)
+                                {
+                                    <tr>
+                                        <td>@telefone.TipoTelefone.DescricaoTipoTelefone</td>
+                                        <td>@telefone.NumeroTelefone</td>
+                                        <td>@(string.IsNullOrEmpty(telefone.Operadora) ? "-" : telefone.Operadora)</td>
+                                        <td>
+                                            @if (telefone.Ativo)
+                                            {
+                                                <span class="badge badge-success">Ativo</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Inativo</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center">Nenhum telefone cadastrado</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">Voltar</a>
+                    <a href="@Url.Action("Edit", new { id = Model.CodigoCliente })" class="btn btn-primary">Editar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+﻿@model crude_teste.Models.Cliente
+
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<div class="container">
+    <h2>Editar Cliente</h2>
+    
+    <div id="mensagens">
+        <!-- se necessario alertas serão adicionados aqui via JavaScript -->
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            <form id="form-cliente">
+                <input type="hidden" id="CodigoCliente" value="@Model.CodigoCliente" />
+                
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h4>Dados Principais</h4>
+                    </div>
+                    
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label>Tipo de Pessoa</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="TipoPessoa" id="pessoaFisica" value="F" @(Model.TipoPessoa == "F" ? "checked" : "")>
+                                    <label class="form-check-label" for="pessoaFisica">Física</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="TipoPessoa" id="pessoaJuridica" value="J" @(Model.TipoPessoa == "J" ? "checked" : "")>
+                                    <label class="form-check-label" for="pessoaJuridica">Jurídica</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="RazaoSocial">Razão Social</label>
+                            <input type="text" class="form-control" id="RazaoSocial" value="@Model.RazaoSocial" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="NomeFantasia">Nome Fantasia</label>
+                            <input type="text" class="form-control" id="NomeFantasia" value="@Model.NomeFantasia" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="Documento">Documento (CPF/CNPJ)</label>
+                            <input type="text" class="form-control" id="Documento" value="@Model.Documento" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-12 mb-3">
+                        <h4>Endereço</h4>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="Endereco">Endereço</label>
+                            <input type="text" class="form-control" id="Endereco" value="@Model.Endereco" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="Complemento">Complemento</label>
+                            <input type="text" class="form-control" id="Complemento" value="@Model.Complemento">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="Bairro">Bairro</label>
+                            <input type="text" class="form-control" id="Bairro" value="@Model.Bairro" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="Cidade">Cidade</label>
+                            <input type="text" class="form-control" id="Cidade" value="@Model.Cidade" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label for="UF">UF</label>
+                            @Html.DropDownListFor(model => model.UF,
+                                            new SelectList(new[] {
+                                                "AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS",
+                                                "MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"
+                                            }, Model.UF),
+                                            "Selecione",
+                                            new { @class = "form-control", id = "UF", required = "required" })
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label for="CEP">CEP</label>
+                            <input type="text" class="form-control" id="CEP" value="@Model.CEP" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-12 mb-3 d-flex justify-content-between">
+                        <h4>Telefones</h4>
+                        <button type="button" id="btn-adicionar-telefone" class="btn btn-sm btn-success">
+                            <i class="fas fa-plus-circle"></i> Adicionar Telefone
+                        </button>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div id="telefones-container">
+                            <!-- Telefones serão adicionados aqui via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-12 d-flex justify-content-between">
+                        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Template para adicionar telefones -->
+<script type="text/template" id="telefone-template">
+    <div class="telefone-item card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label for="telefone-numero-{index}">Número</label>
+                        <input type="text" class="form-control telefone-numero" id="telefone-numero-{index}" required>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-3">
+                    <div class="form-group">
+                        <label for="telefone-tipo-{index}">Tipo</label>
+                        <select class="form-control telefone-tipo" id="telefone-tipo-{index}" required>
+                            <option value="">Selecione</option>
+                            @foreach (var item in ViewBag.TiposTelefone)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-3">
+                    <div class="form-group">
+                        <label for="telefone-operadora-{index}">Operadora</label>
+                        <input type="text" class="form-control telefone-operadora" id="telefone-operadora-{index}">
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-3 d-flex align-items-end">
+                    <div class="form-check mr-3">
+                        <input class="form-check-input telefone-ativo" type="checkbox" id="telefone-ativo-{index}" checked>
+                        <label class="form-check-label" for="telefone-ativo-{index}">
+                            Ativo
+                        </label>
+                    </div>
+                    
+                    <button type="button" class="btn btn-sm btn-danger btn-remover-telefone">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+@section Scripts {
+    <script src="~/js/cliente.js"></script>
+    <script>
+        $(document).ready(function () {
+            @{
+                var telefonesValidos = Model.Telefones?
+                    .Where(t => !string.IsNullOrWhiteSpace(t.NumeroTelefone))
+                    .ToList();
+
+                if (telefonesValidos != null && telefonesValidos.Any())
+                {
+                    foreach (var telefone in telefonesValidos)
+                    {
+                        <text>
+                        adicionarTelefoneExistente({
+                            numeroTelefone: "@telefone.NumeroTelefone",
+                            codigoTipoTelefone: @telefone.CodigoTipoTelefone,
+                            operadora: "@(telefone.Operadora ?? "")",
+                            ativo: @(telefone.Ativo.ToString().ToLower())
+                        });
+                        </text>
+                    }
+                }
+            }
+        });
+    </script>
+}

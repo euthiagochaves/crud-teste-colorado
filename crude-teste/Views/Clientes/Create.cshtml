@@ -1,0 +1,216 @@
+﻿@model crude_teste.Models.Cliente
+
+@{
+    ViewData["Title"] = "Novo Cliente";
+}
+
+<div class="container">
+    <h2>Novo Cliente</h2>
+
+    <div id="mensagens">
+        <!-- se necessario alertas serão exibido aqui via JavaScript -->
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form id="form-cliente">
+                <input type="hidden" id="CodigoCliente" value="0" />
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <h4>Dados Principais</h4>
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group">
+                            <label>Tipo de Pessoa</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="TipoPessoa" id="pessoaFisica" value="F" checked>
+                                    <label class="form-check-label" for="pessoaFisica">Física</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="TipoPessoa" id="pessoaJuridica" value="J">
+                                    <label class="form-check-label" for="pessoaJuridica">Jurídica</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="RazaoSocial">Razão Social</label>
+                            <input type="text" class="form-control" id="RazaoSocial" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="NomeFantasia">Nome Fantasia</label>
+                            <input type="text" class="form-control" id="NomeFantasia" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="Documento">Documento (CPF/CNPJ)</label>
+                            <input type="text" class="form-control" id="Documento" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12 mb-3">
+                        <h4>Endereço</h4>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="Endereco">Endereço</label>
+                            <input type="text" class="form-control" id="Endereco" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="Complemento">Complemento</label>
+                            <input type="text" class="form-control" id="Complemento">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="Bairro">Bairro</label>
+                            <input type="text" class="form-control" id="Bairro" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label for="Cidade">Cidade</label>
+                            <input type="text" class="form-control" id="Cidade" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label for="UF">UF</label>
+                            <select class="form-control" id="UF" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MT">MT</option>
+                                <option value="MS">MS</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <div class="form-group">
+                            <label for="CEP">CEP</label>
+                            <input type="text" class="form-control" id="CEP" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12 mb-3 d-flex justify-content-between">
+                        <h4>Telefones</h4>
+                        <button type="button" id="btn-adicionar-telefone" class="btn btn-sm btn-success">
+                            <i class="fas fa-plus-circle"></i> Adicionar Telefone
+                        </button>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div id="telefones-container">
+                            <!-- telefones serão adicionados aqui via JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12 d-flex justify-content-between">
+                        <a href="@Url.Action("Index")" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Template para adicionar telefones -->
+<script type="text/template" id="telefone-template">
+    <div class="telefone-item card mb-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label for="telefone-numero-{index}">Número</label>
+                        <input type="text" class="form-control telefone-numero" id="telefone-numero-{index}" required>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="form-group">
+                        <label for="telefone-tipo-{index}">Tipo</label>
+                        <select class="form-control telefone-tipo" id="telefone-tipo-{index}" required>
+                            <option value="">Selecione</option>
+    @foreach (var item in ViewBag.TiposTelefone)
+    {
+                                    <option value="@item.Value">@item.Text</option>
+    }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="form-group">
+                        <label for="telefone-operadora-{index}">Operadora</label>
+                        <input type="text" class="form-control telefone-operadora" id="telefone-operadora-{index}">
+                    </div>
+                </div>
+
+                <div class="col-md-2 mb-3 d-flex align-items-end">
+                    <div class="form-check mr-3">
+                        <input class="form-check-input telefone-ativo" type="checkbox" id="telefone-ativo-{index}" checked>
+                        <label class="form-check-label" for="telefone-ativo-{index}">
+                            Ativo
+                        </label>
+                    </div>
+
+                    <button type="button" class="btn btn-sm btn-danger btn-remover-telefone">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+@section Scripts {
+    <script src="~/js/cliente.js"></script>
+}
