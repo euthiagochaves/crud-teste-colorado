@@ -1,7 +1,85 @@
 # crud-teste-colorado
 
+📝 Descrição
+Este projeto é uma aplicação web desenvolvida com ASP.NET Core que oferece funcionalidades de CRUD (Criar, Ler, Atualizar e Deletar) para gerenciamento de clientes. Ele combina uma interface MVC tradicional para interação do usuário e uma API RESTful para operações programáticas. O Entity Framework Core é utilizado como ORM (Object-Relational Mapping) com o banco de dados SQLite, permitindo uma abordagem Code-First para o gerenciamento do esquema do banco de dados.
 
-evidencias da implementacao
+🚀 Funcionalidades
+Interface MVC: Permite aos usuários visualizar, criar, editar e deletar clientes por meio de páginas web.
+
+API RESTful: Endpoints para operações CRUD sobre os clientes, facilitando a integração com outras aplicações.
+
+Gerenciamento de Telefones: Cada cliente pode ter múltiplos números de telefone associados, com tipos e operadoras.
+
+Swagger UI: Interface interativa para testar e documentar a API.
+
+Migrações com EF Core: Gerenciamento do esquema do banco de dados por meio de migrações.
+
+🛠️ Tecnologias e Bibliotecas Utilizadas
+.NET 6.0
+
+ASP.NET Core MVC
+
+Entity Framework Core
+
+SQLite
+
+Swashbuckle.AspNetCore (Swagger)
+
+📦 Dependências NuGet
+Certifique-se de que os seguintes pacotes NuGet estão instalados no projeto:
+
+Microsoft.EntityFrameworkCore
+
+Microsoft.EntityFrameworkCore.Sqlite
+
+Microsoft.EntityFrameworkCore.Design
+
+Swashbuckle.AspNetCore
+
+⚙️ Configuração do Banco de Dados
+O projeto utiliza o Entity Framework Core com SQLite. Para configurar e aplicar as migrações, siga os passos abaixo:
+
+1. Instalar as Ferramentas do EF Core
+Se ainda não tiver as ferramentas do EF Core instaladas globalmente, execute:
+dotnet tool install --global dotnet-ef
+
+2. Criar a Primeira Migração
+No diretório do projeto, execute:
+dotnet ef migrations add InitialCreate
+
+Este comando criará uma pasta Migrations com os arquivos necessários para a migração inicial.
+
+3. Aplicar a Migração e Criar o Banco de Dados
+Para aplicar a migração e criar o banco de dados SQLite, execute:
+dotnet ef database update
+Este comando criará o arquivo do banco de dados conforme definido na string de conexão no appsettings.json.
+
+📄 Documentação da API
+Após executar o projeto, acesse a documentação interativa da API fornecida pelo Swagger em:
+
+bash
+Copiar
+Editar
+https://localhost:5001/swagger
+🧪 Testes
+Para testar a aplicação:
+
+Acesse a interface MVC em https://localhost:5001/Clientes.
+
+Utilize o Swagger para testar os endpoints da API.
+
+Verifique o banco de dados SQLite para confirmar as operações realizadas.
+
+📝 Observações
+Certifique-se de que a string de conexão no appsettings.json está correta e aponta para o local desejado do arquivo .db do SQLite.
+
+Em ambientes de produção, é recomendável utilizar um banco de dados mais robusto, como SQL Server ou PostgreSQL.
+
+Mantenha as migrações sob controle de versão para facilitar o gerenciamento do esquema do banco de dados.
+
+
+
+Evidências de implementação:
 
 ![1](https://github.com/user-attachments/assets/3ce8c316-53fb-4873-91fb-27b07265cf94)
 
